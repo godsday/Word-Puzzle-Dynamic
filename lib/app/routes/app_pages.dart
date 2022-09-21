@@ -1,7 +1,4 @@
 import 'package:get/get.dart';
-
-import '../modules/gridview_screen/bindings/gridview_screen_binding.dart';
-import '../modules/gridview_screen/views/gridview_screen_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';

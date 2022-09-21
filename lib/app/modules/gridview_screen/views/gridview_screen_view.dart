@@ -46,11 +46,11 @@ class GridviewScreenView extends GetView<GridviewScreenController> {
                               .toString()
                               .toUpperCase());
                     },
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                   ),
                 ),
-                onChanged: (Value) =>
-                    gridviewScreenController.serachItem(Value),
+                onChanged: (value) =>
+                    gridviewScreenController.serachItem(value),
                 //  gridviewScreenController.serachItem(
                 //     searchController.text.toString().toUpperCase()),
               ),
@@ -99,7 +99,7 @@ class GridviewItems extends StatelessWidget {
   final height = Get.height;
   Color color;
   List position = [];
-  var index;
+  int index;
 
   final gridviewScreenController = Get.put(GridviewScreenController());
   final homeController = Get.find<HomeController>();
@@ -129,15 +129,13 @@ class GridviewItems extends StatelessWidget {
         }
 
         for (var j = 0; j < position.length; j++) {
-// // print(gridviewScreenController.lettersList[position[j]+1] )
+          // print(gridviewScreenController.lettersList[position[j]+1] )
           if (gridviewScreenController.searchList.length > 1 &&
               gridviewScreenController.lettersList[position[j] + i] ==
                   gridviewScreenController.searchList[1]) {
             color = Colors.red;
-
-            print("object");
           }
-//       // print('ha${gridviewScreenController.searchList[1]}');
+          // print('ha${gridviewScreenController.searchList[1]}');
 
         }
 
