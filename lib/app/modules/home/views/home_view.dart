@@ -80,7 +80,9 @@ class HomeView extends GetView<HomeController> {
                         return Column(
                           children: [
                             Text(
+                              
                               "No of Alphabet Should be entered ${homeController.columns.value}",
+                              textAlign: TextAlign.center,
                               style: const TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.bold),
                             ),

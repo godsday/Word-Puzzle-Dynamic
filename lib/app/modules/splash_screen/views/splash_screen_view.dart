@@ -15,8 +15,8 @@ class SplashScreenView extends GetView<SplashScreenController> {
       body:  Center(
       
           
-        child:Text(  "Splash",
-          style:  TextStyle(fontSize: 30),
+        child:Text("Splash",
+          style:  TextStyle(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.cyan),
 
         
       )));

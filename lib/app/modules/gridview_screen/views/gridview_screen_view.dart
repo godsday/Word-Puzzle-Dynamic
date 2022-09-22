@@ -33,16 +33,16 @@ class GridviewScreenView extends GetView<GridviewScreenController> {
           child: Column(
             children: [
               TextField(
-                controller: controller.searchController,
+                controller: controller.searchController.value,
                 decoration: InputDecoration(
                   hintText: "Search",
-                  prefixIcon: const Icon(Icons.search),
+                  // prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
                   suffixIcon: IconButton(
                     onPressed: () {
                       gridviewScreenController.serachItem(
-                          gridviewScreenController.searchController.text
+                          gridviewScreenController.searchController.value.text
                               .toString()
                               .toUpperCase());
                     },
@@ -87,7 +87,7 @@ class GridviewScreenView extends GetView<GridviewScreenController> {
   }
 }
 
-class GridviewItems extends StatelessWidget {
+class GridviewItems extends StatefulWidget {
   GridviewItems(
       {Key? key,
       required this.letter,
@@ -95,53 +95,74 @@ class GridviewItems extends StatelessWidget {
       required this.index})
       : super(key: key);
   final String letter;
-  final width = Get.width;
-  final height = Get.height;
   Color color;
-  List position = [];
   int index;
 
+  @override
+  State<GridviewItems> createState() => _GridviewItemsState();
+}
+
+class _GridviewItemsState extends State<GridviewItems> {
+  final width = Get.width;
+
+  final height = Get.height;
+
+  List position = [];
+
   final gridviewScreenController = Get.put(GridviewScreenController());
+
   final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
-    //  gridviewScreenController.changecolor(color,letter);
     return GetBuilder<GridviewScreenController>(builder: (cxt) {
+      if(gridviewScreenController.searchList.isEmpty){
+       widget.color=Colors.amber;
+      }
       if (gridviewScreenController.searchList.length > homeController.rows!) {
-        return Container(
+        return const SizedBox(
           height: 30,
           width: 40,
         );
       } else if (gridviewScreenController.searchList.length >
           homeController.columns.toInt()) {
-        return Container(
+        return const SizedBox(
           height: 30,
           width: 40,
         );
       }
       for (var i = 0; i < gridviewScreenController.searchList.length; i++) {
-        if (i == 0 && letter == gridviewScreenController.searchList[i]) {
-          color = Colors.red;
-          gridviewScreenController.firstPosition.add(index);
+        if (i == 0 && widget.letter == gridviewScreenController.searchList[i]) {
+         widget. color = Colors.red;
+          gridviewScreenController.firstPosition.add(widget.index);
           position = gridviewScreenController.firstPosition.toSet().toList();
-          // print(position);
+           print(position);
         }
+        //  if(i == 0 && gridviewScreenController.lettersList[i] != gridviewScreenController.searchList[i]){
+        //   return SizedBox(height: 30,width: 30,);
+        // }
+
+
 
         for (var j = 0; j < position.length; j++) {
-          // print(gridviewScreenController.lettersList[position[j]+1] )
-          if (gridviewScreenController.searchList.length > 1 &&
+          
+          if (
+             i==1&&
+              // gridviewScreenController.searchList.length > 1 &&
               gridviewScreenController.lettersList[position[j] + i] ==
-                  gridviewScreenController.searchList[1]) {
-            color = Colors.red;
+                  gridviewScreenController.searchList[i]) {
+                    print("hell");
+           widget. color = Colors.red;
           }
-          // print('ha${gridviewScreenController.searchList[1]}');
+          //  print('ha${gridviewScreenController.searchList[1]}');
+          //  print(gridviewScreenController.lettersList[position[j]+1] );
 
         }
 
-        //  else if (letter == gridviewScreenController.searchList[i]) {
-        //    color = Colors.red;
-        //  }
+        // if (gridviewScreenController.searchList.length > 1 &&
+        //     letter == gridviewScreenController.searchList[i]) {
+        //   color = Colors.red;
+        // }
 
         // for (var i = 0; i < gridviewScreenController.lettersList.length; i++) {
         //   if(i==0 && gridviewScreenController.lettersList[position[i]+1]==gridviewScreenController.searchList[i+1]){
@@ -154,8 +175,8 @@ class GridviewItems extends StatelessWidget {
         alignment: Alignment.center,
         width: width / 5,
         height: height / 7,
-        color: color,
-        child: Text(cxt.lettersList[index],
+        color: widget.color,
+        child: Text(cxt.lettersList[widget.index],
             style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
       );
     });
