@@ -87,7 +87,7 @@ class GridviewScreenView extends GetView<GridviewScreenController> {
   }
 }
 
-class GridviewItems extends StatefulWidget {
+class GridviewItems extends StatelessWidget {
   GridviewItems(
       {Key? key,
       required this.letter,
@@ -98,11 +98,6 @@ class GridviewItems extends StatefulWidget {
   Color color;
   int index;
 
-  @override
-  State<GridviewItems> createState() => _GridviewItemsState();
-}
-
-class _GridviewItemsState extends State<GridviewItems> {
   final width = Get.width;
 
   final height = Get.height;
@@ -116,8 +111,8 @@ class _GridviewItemsState extends State<GridviewItems> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GridviewScreenController>(builder: (cxt) {
-      if(gridviewScreenController.searchList.isEmpty){
-       widget.color=Colors.amber;
+      if (gridviewScreenController.searchList.isEmpty) {
+        color = Colors.amber;
       }
       if (gridviewScreenController.searchList.length > homeController.rows!) {
         return const SizedBox(
@@ -132,51 +127,38 @@ class _GridviewItemsState extends State<GridviewItems> {
         );
       }
       for (var i = 0; i < gridviewScreenController.searchList.length; i++) {
-        if (i == 0 && widget.letter == gridviewScreenController.searchList[i]) {
-         widget. color = Colors.red;
-          gridviewScreenController.firstPosition.add(widget.index);
+        if (i == 0 && letter == gridviewScreenController.searchList[i]) {
+          color = Colors.red;
+          gridviewScreenController.firstPosition.add(index);
           position = gridviewScreenController.firstPosition.toSet().toList();
-           print(position);
+          print(position);
         }
-        //  if(i == 0 && gridviewScreenController.lettersList[i] != gridviewScreenController.searchList[i]){
-        //   return SizedBox(height: 30,width: 30,);
-        // }
-
-
 
         for (var j = 0; j < position.length; j++) {
-          
-          if (
-             i==1&&
+          if (i == 1 &&
               // gridviewScreenController.searchList.length > 1 &&
               gridviewScreenController.lettersList[position[j] + i] ==
                   gridviewScreenController.searchList[i]) {
-                    print("hell");
-           widget. color = Colors.red;
+            print("hell");
+            color = Colors.red;
           }
           //  print('ha${gridviewScreenController.searchList[1]}');
           //  print(gridviewScreenController.lettersList[position[j]+1] );
 
         }
 
-        // if (gridviewScreenController.searchList.length > 1 &&
-        //     letter == gridviewScreenController.searchList[i]) {
-        //   color = Colors.red;
-        // }
-
-        // for (var i = 0; i < gridviewScreenController.lettersList.length; i++) {
-        //   if(i==0 && gridviewScreenController.lettersList[position[i]+1]==gridviewScreenController.searchList[i+1]){
-        //     color=Colors.red;
-        //   }
-
+        if (gridviewScreenController.searchList.length > 1 &&
+            letter == gridviewScreenController.searchList[i]) {
+          color = Colors.red;
+        }
       }
 
       return Container(
         alignment: Alignment.center,
         width: width / 5,
         height: height / 7,
-        color: widget.color,
-        child: Text(cxt.lettersList[widget.index],
+        color: color,
+        child: Text(cxt.lettersList[index],
             style: const TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
       );
     });

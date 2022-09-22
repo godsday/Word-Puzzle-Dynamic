@@ -17,9 +17,6 @@ class HomeController extends GetxController {
     datas = int.parse(noOfColumController.text);
     columns.value = (rows! * datas!);
     displayValue = true.obs;
-    print(rows);
-    print(columns);
-    print(datas);
     update();
   }
 }
